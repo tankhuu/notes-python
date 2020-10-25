@@ -15,10 +15,8 @@
 
 - PyTest will automatically discover tests when you execute based on a standard naming convention.
 - Test functions should include "test" at the begining of the function name.
-- Classes with tests in them should have "Test" at the beginning of the class name and not have an "__init__" method.
+- Classes with tests in them should have "Test" at the beginning of the class name and not have an "**init**" method.
 - Filenames of test modules should start or end with "test". (i.e. test_example.py or example_test.py)
-
-## XUnit Style Setup and Teardown
 
 ## Command
 
