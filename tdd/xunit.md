@@ -96,3 +96,53 @@ def test2():
   print("Executing Test2!")
   assert True
 ```
+
+## Yield
+
+- The yield keyword is the simpler of the two options for teardown code.
+- The code after the yield is executed after the fixture goes out of scope.
+- The yield keyword is a replacement for return and any return values should be passed to it.
+
+## Addfinalizer
+
+- The addfinalizer method of adding teardown code is a little more complicated but also a little more capable than the yield statement.
+- With the addfinalizer method one or more finalizer functions are added via the request-context’s addfinalizer method.
+- One of the big differences between this method and the yield keyword method is that this method allows for multiple finalization functions to be specified.
+- Now lets take a look at some examples.
+
+> Which tests a fixture applies to and how often it is run depends on the fixture scope test fixtures
+
+## Test Fixture have 4 Scopes
+
+- Function - Run the fixture once for each test.
+- Class - Run the fixture once for each class of tests.
+- Module - Run once when the module goes in scope.
+- Session - The fixture is run when pytest starts.
+
+## Return Objects and Params
+
+PyTest Test Fixtures allow you to optionally return data from the fixture that can be used in the test.
+
+- The optional params array argument in the fixture decorator can be used to specify one or more values that should be passed to the test.
+- When a params argument has multiple values then the test will be called once with each value.
+
+```
+@pytest.fixture(params=[1,2])
+def setupData(request):
+  return request.param
+def test1(setupData):
+  print(setupData)
+```
+
+## Command line Arguments
+
+-v Report in verbose mode
+-q run in quiet mode (helpful when run hundreds or thousands tests at once)
+-s don't capture console output (show print statements on the console)
+--ignore Ignore the specified path when discovering tests.
+--maxfail Stop after the specified number of failures.
+
+```
+pytest -v -s -k "test2 or test3"
+pytest -v -s -m "test1 or test3"
+```
