@@ -55,3 +55,29 @@ Test and production code are both written together in a small bits of functional
 - Dictionary entries
 - And Environment Variables
 - Unittest provides a patch decorator which performs similar operations but this can sometimes conflict with the PyTest TestFixture decorators so I’ll focus on using monkeypatch for this functionality.
+
+### unittest.mock is a mocking framework for Python.
+
+- unittest.mock is a mocking framework for Python.
+- Unittest.mock provides the Mock class which is an extremely power class that be used to create test objects that can be used as fakes, stubs, spies, or true mocks for other classes or functions.
+- The Mock class has many initialization parameters for specifying how the object should behave such as what interface it should mock, if it should call another function when it is called, or what value it should return.
+- Once a Mock object has been used it has many built-in functions for verifying how it was used such as how many times it was called and with what parameters.
+
+```
+# Example
+def test_Foo():
+bar = Mock() functionThatUsesBar( bar ) bar.assert_called_once()
+```
+
+- Mock provides many initialization parameters which can be used to control the mock object’s behavior.
+- The spec parameter specifies the interface that the Mock object is implementing. If any attributes of the mock object are called which are not in that interface then the
+- Mock will automatically generate an AttributeError exception.
+- The side_effect parameter specifies a function that should be called when the mock is called. This can be useful for more complicated test logic that returns different values depending on input parameters or generates exceptions.
+- The return_value parameter specifies the value that should be returned when the mock object is called. If the side_effect parameter is set it’s return value is used instead.
+
+```
+# Example
+def test_Foo(): •
+bar = Mock(spec=SpecClass) bar2= Mock(side_effect=
+barFunc) • bar3 = Mock(return_value=1)
+```
