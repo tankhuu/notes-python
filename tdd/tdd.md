@@ -26,3 +26,32 @@ Test and production code are both written together in a small bits of functional
 - You may not write any production code until you have written a failing unit test.
 - You may not write more of the unit test than is sufficient to fail, and not compiling is failing.
 - You may not write more production code than is sufficient to pass the currently failing unit test.
+
+## Test Doubles
+
+- Almost all code that gets implemented will depend on another piece of code in the system.
+- Those other pieces of code are often times trying to do things or communicate with things that are not available in the unit testing environment, or are so slow that they would make our unit tests extremely slow. For example, if you’re code queries a 3rd party REST API on the internet and that server is down for any reason you can’t run your tests.
+- Test doubles are the answer to that problem. They are objects created in the test to replace the real production system collaborators.
+- There are many types of test doubles.
+  - _Dummy_ objects are the simplest. They are simply placeholders that are intended to be passed around but not actually called or used in any real way. They will often generate exceptions if they are called.
+  - _Fake_ objects have a different (and usually simplified) implementation from the production collaborator that make them useable in the test code but not suitable for production.
+  - _Stubs_ provide implementations that do expect to be called but respond with basic canned responses.
+  - _Spies_ provide implementations that record the values that are passed in to them. The tests can then use those recorded values for validating the code under test.
+  - _Mock_ objects are the most sophisticated of all the test doubles. They have pre-programmed expectations about the ordering of calls, the number of times functions will be called, and the values that will be passed in. Mock objects will generate their own exceptions when these pre-programmed expectations are not met.
+
+> We should use Mock for Test Doubles
+
+### Mock Frameworks
+
+- Mock frameworks are libraries that provide easy to use API’s for automatically creating any of these types of test doubles AT RUNTIME.
+- They provide easy API’s for specifying the mocking expectations in your unit tests.
+- They can be much more efficient than implementing your own custom mock objects.
+- As creating your own custom mock objects can be time consuming, tedious, and error prone.
+
+### PyTest Monkeypatch Test Fixture
+
+- PyTest provides the monkeypatch test fixture to allow a test to dynamically change:
+- Module and class attributes
+- Dictionary entries
+- And Environment Variables
+- Unittest provides a patch decorator which performs similar operations but this can sometimes conflict with the PyTest TestFixture decorators so I’ll focus on using monkeypatch for this functionality.
